@@ -16,6 +16,8 @@ const Version = "0.2.1"
 
 var options struct {
 	origin       string
+	user         string
+	pass         string
 	printVersion bool
 }
 
@@ -26,6 +28,8 @@ func main() {
 		Run:   root,
 	}
 	rootCmd.Flags().StringVarP(&options.origin, "origin", "o", "", "websocket origin")
+        rootCmd.Flags().StringVarP(&options.user, "user", "u", "", "username")
+	rootCmd.Flags().StringVarP(&options.pass, "pass", "p", "", "password")
 	rootCmd.Flags().BoolVarP(&options.printVersion, "version", "v", false, "print version")
 
 	rootCmd.Execute()

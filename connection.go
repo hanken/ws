@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"regexp"
+	"encoding/base64"
 
 	"github.com/chzyer/readline"
 	"github.com/fatih/color"
@@ -20,6 +21,8 @@ type session struct {
 func connect(url, origin string, rlConf *readline.Config) error {
 	headers := make(http.Header)
 	headers.Add("Origin", origin)
+	encoded := base64.StdEncoding.EncodeToString([]byte(options.user + ":" + options.pass))
+	headers.Add("Authorization", "Basic " + encoded)
 
 	ws, _, err := websocket.DefaultDialer.Dial(url, headers)
 	if err != nil {
