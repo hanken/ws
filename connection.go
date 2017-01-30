@@ -24,11 +24,11 @@ func connect(url, origin string, rlConf *readline.Config) error {
 	encoded := base64.StdEncoding.EncodeToString([]byte(options.user + ":" + options.pass))
 	headers.Add("Authorization", "Basic " + encoded)
 
+	fmt.Printf("Connecting to " + url)
 	ws, _, err := websocket.DefaultDialer.Dial(url, headers)
 	if err != nil {
 		return err
 	}
-
 	rl, err := readline.NewEx(rlConf)
 	if err != nil {
 		return err
